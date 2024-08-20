@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.academico;
-
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,13 +13,15 @@ import javax.swing.JOptionPane;
 public class VentanaPrincipal extends javax.swing.JFrame {
 
     
-    int arrayMenores[] =new int[5];
+    int arrayMenores[];
     int in=0;
-    int arrayMayores[] =new int[5];
+    int arrayMayores[];
     int may=0;
-    int arrayAdultos[] =new int[5];
+    int arrayAdultos[];
     int ad=0;
-    
+    int tamañoMenores = 0;
+    int tamañoMayores = 0;
+    int tamañoAdultos = 0;
     
     
     
@@ -42,12 +44,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         create = new javax.swing.JButton();
         search = new javax.swing.JButton();
+        sizes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("SISTEMA ACADEMICO");
 
         create.setText("Crear");
+        create.setEnabled(false);
         create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createActionPerformed(evt);
@@ -55,9 +59,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         search.setText("Consultar");
+        search.setEnabled(false);
         search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchActionPerformed(evt);
+            }
+        });
+
+        sizes.setText("Tamaños");
+        sizes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sizesActionPerformed(evt);
             }
         });
 
@@ -74,8 +86,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(create)
                         .addGap(18, 18, 18)
-                        .addComponent(search)))
-                .addContainerGap(127, Short.MAX_VALUE))
+                        .addComponent(search)
+                        .addGap(18, 18, 18)
+                        .addComponent(sizes)))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +99,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(create)
-                    .addComponent(search))
+                    .addComponent(search)
+                    .addComponent(sizes))
                 .addContainerGap(225, Short.MAX_VALUE))
         );
 
@@ -95,37 +110,67 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
         
-        for(int i=0;i<5;i++){
-        JOptionPane.showMessageDialog(rootPane, arrayMenores[i]);
-        JOptionPane.showMessageDialog(rootPane, arrayMayores[i]);
-        JOptionPane.showMessageDialog(rootPane, arrayAdultos[i]);};
+        for (int i = 0; i < tamañoMenores; i++) {
+            JOptionPane.showMessageDialog(rootPane, "Menor " + Arrays.toString(arrayMenores));
+        }
+        for (int i = 0; i < tamañoMayores; i++) {
+            JOptionPane.showMessageDialog(rootPane, "Adulto " + Arrays.toString(arrayMayores));
+        }
         
-        
+        for (int i = 0; i < tamañoAdultos; i++) {
+            JOptionPane.showMessageDialog(rootPane, "Adulto Mayor " + Arrays.toString(arrayAdultos));
+        }
+
+        for (int i = 0; i < 5; i++) {
+            JOptionPane.showMessageDialog(rootPane, "Menores " + Arrays.toString(arrayMenores) + "/Adultos " + Arrays.toString(arrayMayores) + "/Adultos Mayores " + Arrays.toString(arrayAdultos));
+        }
+
+
     }//GEN-LAST:event_searchActionPerformed
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         // TODO add your handling code here:
+       
+        
         int edad=Integer.parseInt(
         JOptionPane.showInputDialog(rootPane, "Diga su edad")
         );
-        if(edad<18 && in<5){JOptionPane.showMessageDialog(rootPane, "Usted es menor de edad");
+        if(edad<18 && in<tamañoMenores){JOptionPane.showMessageDialog(rootPane, "Usted es menor de edad");
         
         arrayMenores[in]=edad;
-        in++;if(in==5){JOptionPane.showMessageDialog(rootPane, "No puede ingresar mas menores de edad");}}
+        in++;if(in==tamañoMenores){JOptionPane.showMessageDialog(rootPane, "No puede ingresar mas menores de edad");}}
         
-        else if(edad>60 && ad<5){JOptionPane.showMessageDialog(rootPane, "Usted es adulto mayor");
+        else if(edad>60 && ad<tamañoAdultos){JOptionPane.showMessageDialog(rootPane, "Usted es adulto mayor");
         
         arrayAdultos[ad]=edad;
-        ad++;if(ad==5){JOptionPane.showMessageDialog(rootPane, "No puede ingresar mas adultos mayores");}}
+        ad++;if(ad==tamañoAdultos){JOptionPane.showMessageDialog(rootPane, "No puede ingresar mas adultos mayores");}}
         
-        else if(edad>18 && edad<60 && may<5){JOptionPane.showMessageDialog(rootPane, "Usted es mayor de edad");
+        else if(edad>18 && edad<60 && may<tamañoMayores){JOptionPane.showMessageDialog(rootPane, "Usted es mayor de edad");
         
         arrayMayores[may]=edad;
-        may++;if(may==5){JOptionPane.showMessageDialog(rootPane, "No puede ingresar mas mayores de edad");}
+        may++;if(may==tamañoMayores){JOptionPane.showMessageDialog(rootPane, "No puede ingresar mas mayores de edad");}
         
         }
-   
+   search.setEnabled(true);
     }//GEN-LAST:event_createActionPerformed
+
+    private void sizesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sizesActionPerformed
+
+        
+        tamañoMenores=Integer.parseInt(
+        JOptionPane.showInputDialog("Ingrese el tamaño de la lista de menores ")
+        );
+        tamañoMayores=Integer.parseInt(
+        JOptionPane.showInputDialog("Ingrese el tamaño de la lista de mayores ")
+        );
+        tamañoAdultos=Integer.parseInt(
+        JOptionPane.showInputDialog("Ingrese el tamaño de la lista de adultos ")
+        );
+
+create.setEnabled(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sizesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,5 +211,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton create;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton search;
+    private javax.swing.JButton sizes;
     // End of variables declaration//GEN-END:variables
 }
